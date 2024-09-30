@@ -1,0 +1,45 @@
+//OP_SELLLIMIT
+[
+{
+  "TVkey": "123",
+  "symbol": "{{ticker}}",
+  "operation": "sell",
+  "action": "open",
+  "price": "{{close}}",
+  "time": "{{time}}",
+  "timenow": "{{timenow}}"
+},
+
+{
+  "TVkey": "123",
+  "symbol": "{{ticker}}",
+  "operation": "sell",
+  "action": "close",
+  "price": "{{close}}",
+  "time": "{{time}}",
+  "timenow": "{{timenow}}"
+}
+,
+
+//OP_SELL Market order
+
+{
+  "TVkey": "123",
+  "symbol": "{{ticker}}",
+  "operation": "sell_m",
+  "action": "open",
+  "price": "{{close}}",
+  "time": "{{time}}",
+  "timenow": "{{timenow}}"
+}
+,
+{
+  "TVkey": "123",
+  "symbol": "{{ticker}}",
+  "operation": "sell_m",
+  "action": "close",
+  "price": "{{close}}",
+  "time": "{{time}}",
+  "timenow": "{{timenow}}"
+}
+]

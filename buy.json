@@ -1,0 +1,44 @@
+//OP_BUYLIMIT
+[
+{
+"TVkey": "123",
+"symbol": "{{ticker}}",
+"operation": "buy",
+"action": "open",
+"price" :" {{close}}",
+"time": "{{time}}",
+"timenow": "{{timenow}}"
+}
+,
+{
+"TVkey": "123",
+"symbol": "{{ticker}}",
+"operation": "buy",
+"action": "close",
+"price" : "{{close}}",
+"time": "{{time}}",
+"timenow": "{{timenow}}"
+}
+,
+
+//OP_BUY Market order
+{
+"TVkey": "123",
+"symbol": "{{ticker}}",
+"operation": "buy_m",
+"action": "open",
+"price" : "{{close}}",
+"time": "{{time}}",
+"timenow": "{{timenow}}"
+}
+,
+{
+"TVkey": "123",
+"symbol": "{{ticker}}",
+"operation": "buy_m",
+"action": "close",
+"price" : "{{close}}",
+"time": "{{time}}",
+"timenow": "{{timenow}}"
+}
+]
