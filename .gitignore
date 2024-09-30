@@ -5,5 +5,3 @@ __pycache__
 pipfile.lock
 chalicelib/__init__.py
 chalicelib/__pycache__
-chalicelib/__init__.py
-chalicelib/__init__.py
