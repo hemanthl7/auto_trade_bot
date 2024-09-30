@@ -1,4 +1,5 @@
 import json
+
 from botocore.exceptions import ClientError
 from chalice import Chalice
 from chalicelib import *
@@ -67,14 +68,12 @@ def send():
 
 @app.route('/ticket', methods=['POST'])
 def save_ticket():
-    request = app.current_request
-    ticket = request.json_body
+    ticket = get_json_body()
     set_ticket(ticket)
 
 @app.route('/ticket', methods=['DELETE'])
 def delete_ticket():
-    request = app.current_request
-    ticket = request.json_body
+    ticket = get_json_body()
     remove_ticket(ticket)
 
 
@@ -171,25 +170,36 @@ def set_ticket(ticket):
         db.lpush( ticket['_symbol'],ticket['_ticket'] )
         db.set(ticket['_ticket'], ticket['_symbol'])
 
-def get_tickets(ticket):
-    if REDIS_ENABLED and 'action' in ticket and 'symbol' in ticket:
-        return db.lrange(ticket['_symbol'], 0, -1)
+def get_tickets(symbol):
+    if REDIS_ENABLED and symbol is not None:
+        return db.lrange(symbol, 0, -1)
+
 
 def remove_ticket(ticket):
     if REDIS_ENABLED and '_ticket' in ticket:
         sym = db.get(ticket['_ticket'])
         if sym is not None:
             db.lrem(str(sym), 0, ticket['_ticket'])
-            db.delete(str(sym))
+            db.delete(ticket['_ticket'])
 
+# _action_type|_action|_type|_symbol|_price|_SL|_TP|_comment|_lots|_magic|_ticket
 def return_msgs(msg):
-    if msg['action'] == "close":
-        return set_ticket_value(msg, get_tickets(msg))
+    msql = msg.split("|")
+    action = msql[1].lower()
+    if action == "close" or action == "close_partial":
+        return set_ticket_value(msql, get_tickets(msql[3]))
     else:
-        return msg
+        return "|".join(msql)
 
-def set_ticket_value(msg, tickets):
+def set_ticket_value(msql, tickets):
     for ticket in tickets:
-        msql = msg.split("|")
         msql[-1] = ticket
         return "|".join(msql)
+
+def get_json_body():
+    request = app.current_request
+    body = request.raw_body
+    if isinstance(body, bytes):
+        body = body.decode('ascii')
+    body = body.replace("\x00","")
+    return json.loads(body)
