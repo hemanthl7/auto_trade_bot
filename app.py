@@ -116,20 +116,20 @@ def send_message(message_body, message_attributes=None, message_deduplication_id
 #     '_magic': 12345,
 #     '_ticket': 0})
 def convert_mql(webhook_message, ticket="0"):
-    if webhook_message['operation'].lower() == 'buy':
+    if webhook_message['operation'].lower() == 'buy_l':
         op_type = 'OP_BUYLIMIT'
-    elif webhook_message['operation'].lower() == 'sell':
+    elif webhook_message['operation'].lower() == 'sell_l':
         op_type = 'OP_SELLLIMIT'
-    elif webhook_message['operation'].lower() == 'buy_m':
+    elif webhook_message['operation'].lower() == 'buy':
         op_type = 'OP_BUY'
     else:
         op_type = 'OP_SELL'
 
     if webhook_message['action'].lower() == 'open':
         action = 'OPEN'
-    elif webhook_message['action'].lower() == 'close':
+    elif webhook_message['action'].lower() == 'close_p':
         action = 'CLOSE_PARTIAL'
-    elif webhook_message['action'].lower() == 'close_m':
+    elif webhook_message['action'].lower() == 'close':
         action = 'CLOSE'
     else:
         action = 'MODIFY'

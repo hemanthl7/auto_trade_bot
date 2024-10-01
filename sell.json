@@ -3,7 +3,7 @@
 {
   "TVkey": "123",
   "symbol": "{{ticker}}",
-  "operation": "sell",
+  "operation": "sell_l",
   "action": "open",
   "price": "{{close}}",
   "time": "{{time}}",
@@ -13,7 +13,7 @@
 {
   "TVkey": "123",
   "symbol": "{{ticker}}",
-  "operation": "sell",
+  "operation": "sell_l",
   "action": "close",
   "price": "{{close}}",
   "time": "{{time}}",
@@ -26,7 +26,7 @@
 {
   "TVkey": "123",
   "symbol": "{{ticker}}",
-  "operation": "sell_m",
+  "operation": "sell",
   "action": "open",
   "price": "{{close}}",
   "time": "{{time}}",
@@ -36,7 +36,7 @@
 {
   "TVkey": "123",
   "symbol": "{{ticker}}",
-  "operation": "sell_m",
+  "operation": "sell",
   "action": "close",
   "price": "{{close}}",
   "time": "{{time}}",
